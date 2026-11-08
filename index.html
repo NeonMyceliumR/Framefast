@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#172c2a">
+  <title>Framefast — Wall Framing Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="./"><span class="brand-mark">F</span> FRAMEFAST</a>
+      <span class="header-label">Wall framing calculator</span>
+    </div>
+  </header>
+  <main class="shell">
+    <section class="intro">
+      <p class="eyebrow">BUILT FOR THE JOBSITE</p>
+      <h1>Frame it with confidence.</h1>
+      <p>Get a practical material estimate and cut list for a single straight wall.</p>
+    </section>
+    <div class="workspace">
+      <form id="wall-form" class="panel input-panel">
+        <div class="section-heading"><div><p class="step">01 / WALL DETAILS</p><h2>Size your wall</h2></div><span class="icon">↗</span></div>
+        <p class="hint">Enter the overall wall size, including plates.</p>
+        <div class="field-grid">
+          <label>Wall length <span class="unit">feet</span><input id="length-ft" type="number" min="0" step="1" value="12" required></label>
+          <label>Extra inches <span class="unit">in</span><input id="length-in" type="number" min="0" max="11.99" step="any" value="0" required></label>
+          <label>Wall height <span class="unit">feet</span><input id="height-ft" type="number" min="0" step="1" value="8" required></label>
+          <label>Extra inches <span class="unit">in</span><input id="height-in" type="number" min="0" max="11.99" step="any" value="0" required></label>
+          <label>Stud spacing <span class="unit">on center</span><select id="spacing"><option value="16">16 inches</option><option value="24">24 inches</option><option value="12">12 inches</option></select></label>
+          <label>Plate stock <span class="unit">length</span><select id="plate-stock"><option value="96">8 feet</option><option value="120">10 feet</option><option value="144">12 feet</option><option value="192">16 feet</option><option value="240">20 feet</option></select></label>
+        </div>
+        <div class="divider"></div>
+        <div class="section-heading"><div><p class="step">02 / OPENINGS</p><h2>Doors &amp; windows</h2></div></div>
+        <p class="hint">Optional. Use rough opening dimensions, not the door or window size.</p>
+        <div id="openings"></div>
+        <button type="button" class="add-button" id="add-opening">+ Add an opening</button>
+        <button type="submit" class="calculate-button">Calculate materials <span>→</span></button>
+      </form>
+
+      <section class="results" aria-labelledby="results-title">
+        <div class="results-heading"><div><p class="step">03 / YOUR ESTIMATE</p><h2 id="results-title">Material summary</h2></div><span class="badge">SINGLE WALL</span></div>
+        <div id="error" class="error" role="alert" hidden></div>
+        <div id="results" aria-live="polite"></div>
+        <div class="notice"><strong>Before you build</strong><p>Planning estimate only—not structural design. Confirm header size, supports, connections, plate splices and code requirements with your local authority or a qualified professional. Add waste and verify dimensions on site.</p></div>
+      </section>
+    </div>
+  </main>
+  <footer class="shell">FRAMEFAST <span>Measure twice. Build once.</span></footer>
+  <template id="opening-template">
+    <fieldset class="opening">
+      <legend>Opening</legend>
+      <div class="opening-top"><strong class="opening-title"></strong><button type="button" class="remove-button">Remove</button></div>
+      <div class="field-grid">
+        <label>Type<select class="opening-type"><option value="door">Door</option><option value="window">Window</option></select></label>
+        <label>Left edge <span class="unit">in</span><input class="opening-left" type="number" min="4.5" step="any" value="36" required></label>
+        <label>Rough width <span class="unit">in</span><input class="opening-width" type="number" min="1.5" step="any" value="36" required></label>
+        <label>Rough height <span class="unit">in</span><input class="opening-height" type="number" min="1" step="any" value="80" required></label>
+        <label class="sill-field" hidden>Sill height <span class="unit">in</span><input class="opening-sill" type="number" min="1.5" step="any" value="36"></label>
+        <label>Header depth <span class="unit">actual in</span><input class="opening-header" type="number" min="1.5" step="any" value="5.5" required></label>
+      </div>
+      <p class="opening-help">Left edge is measured from the wall’s left end to the rough opening. Sill height is measured from the top of the bottom plate to the top of the rough sill. Header depth is the actual installed depth.</p>
+    </fieldset>
+  </template>
+</body>
+</html>
